@@ -33,7 +33,7 @@ function addMessageForUser () {
         }
 
         websocket.onmessage = function(event) {
-          addSms (event) ;
+          addSms (event.data) ;
         };
     }
 
@@ -49,7 +49,7 @@ buttonGeo.addEventListener('click', () => {
         navigator.geolocation.getCurrentPosition((position) => {
           const { coords } = position;
           console.log(coords.latitude, coords.longitude);
-          addSms(coords.latitude, coords.longitude)
+          addSms(`<a href = 'https://www.openstreetmap.org/#map=10/${coords.latitude}/${coords.longitude}'>https://www.openstreetmap.org/#map=10/${coords.latitude}/${coords.longitude}</a>`)
         });
       }
 });
@@ -58,7 +58,7 @@ buttonGeo.addEventListener('click', () => {
 function addSms (text) {
     let mesageServer = document.createElement('div');
     mesageServer.classList.add('mesageServer');
-    mesageServer.innerHTML = text.data;
+    mesageServer.innerHTML = text;
     blockMessage.append(mesageServer);
 }
 
